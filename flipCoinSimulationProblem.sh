@@ -1,5 +1,6 @@
 echo "This problem displays the winner Heads or Tails"
 target_count=21
+minimum_difference=2
 heads_count=0
 tails_count=0
 flips_count=0
@@ -16,18 +17,17 @@ do
         echo "Tails"
         (( tails_count++ ))
     fi
-    if(( heads_count == target_count || tails_count == target_count ))
+    
+    diff_bt_hc_tc=$(( heads_count - tails_count ))
+    if(( heads_count == target_count && diff_bt_hc_tc >= minimum_difference ))
     then
+        echo "Heads won by $diff_bt_hc_tc points"
         break
-    fi 
+    elif(( tails_count == target_count && ${diff_bt_hc_tc#-} >= minimum_difference ))
+    then
+         echo "Tails won by ${diff_bt_hc_tc#-} points"
+         break
+    fi
+    
 done
 echo "The Heads count is $heads_count and Tails Count is $tails_count"
-if(( heads_count > tails_count ))
-then
-    echo "Heads won by $(( heads_count - tails_count ))"
-elif(( tails_count > heads_count ))
-then
-    echo "Tails won by $(( tails_count - heads_count ))"
-else    
-    echo "Its tie"
-fi
