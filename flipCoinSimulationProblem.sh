@@ -22,5 +22,5 @@ elif(( tails_count > heads_count ))
 then
     echo "Winner is Tails"
 else    
-    echo "Its tie"
+    echo "Its  tie"
 fi
